@@ -31,7 +31,9 @@
     </b-row>
     <b-row>
       <b-col sm="1">
-        <b-button variant="success" @click="loadCharacters()">pesquisar</b-button>
+        <b-button variant="success" @click="loadCharacters()"
+          >pesquisar</b-button
+        >
       </b-col>
       <b-col sm="1">
         <b-button variant="secondary" @click="clear()">limpar</b-button>
@@ -55,19 +57,29 @@
         </template>
 
         <template #row-details="row">
-          <b-card>
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"
-                ><b>Localização de Origem:</b></b-col
-              >
-              <b-col>{{ row.item.location.name }}</b-col>
-            </b-row>
+          <b-card bg-variant="dark" text-variant="white">
+            <b-row class="card-details">
+              <b-col sm="9">
+                <b-row class="mb-2">
+                  <b-col md="3" class="text-sm-right"
+                    ><b>Localização de Origem:</b></b-col
+                  >
+                  <b-col>{{ row.item.location.name }}</b-col>
+                </b-row>
 
-            <b-row class="mb-2">
-              <b-col sm="3" class="text-sm-right"
-                ><b>Episódios que participou:</b></b-col
-              >
-              <b-col>{{ formatEpisode(row.item.episode) }}</b-col>
+                <b-row class="mb-2">
+                  <b-col md="3" class="text-sm-right"
+                    ><b>Episódios que participou:</b></b-col
+                  >
+                  <b-col>{{ formatEpisode(row.item.episode) }}</b-col>
+                </b-row>
+              </b-col>
+              <b-col sm="3" class="image-detail">
+                <img
+                  :src="`${row.item.image}`"
+                  alt="rickandmorty"
+                />
+              </b-col>
             </b-row>
           </b-card>
         </template>
@@ -93,10 +105,10 @@ export default {
     return {
       mode: "",
       lista: [],
-      nome:'',
-      genero:'',
-      status:'',
-      especie:'',
+      nome: "",
+      genero: "",
+      status: "",
+      especie: "",
       page: 1,
       limit: 0,
       count: 0,
@@ -131,15 +143,14 @@ export default {
       return episode;
       // console.log(episode)
     },
-    clear(){
+    clear() {
       this.page = 1;
       this.nome = "";
       this.status = "";
       this.especie = "";
-      // this.lista = [];
-     
+
       this.loadCharacters();
-    }
+    },
   },
   watch: {
     $route() {
@@ -161,4 +172,9 @@ export default {
 .lista {
   padding: 20px;
 }
+
+.card-details img {
+  width: 200px;
+  height: 150px;
+} 
 </style>
